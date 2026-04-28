@@ -23,18 +23,20 @@ function isActive(path: string): boolean {
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-surface/80 backdrop-blur-md">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
       <!-- Logo: ZZzzswszzZZ -->
-      <router-link to="/" class="flex items-center gap-1 group">
-        <svg width="100" height="28" viewBox="0 0 100 28" fill="none" class="transition-opacity group-hover:opacity-80">
-          <text x="0" y="18" font-family="monospace" font-size="18" font-weight="bold" fill="#60a5fa">Z</text>
-          <text x="18" y="15" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.7">z</text>
-          <text x="28" y="12" font-family="monospace" font-size="8" fill="#60a5fa" opacity="0.4">z</text>
-          <text x="36" y="16" font-family="monospace" font-size="9" fill="#666">sws</text>
-          <text x="60" y="12" font-family="monospace" font-size="8" fill="#60a5fa" opacity="0.4">z</text>
-          <text x="68" y="15" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.7">z</text>
-          <text x="78" y="18" font-family="monospace" font-size="18" font-weight="bold" fill="#60a5fa">Z</text>
-          <circle cx="94" cy="8" r="1.5" fill="#60a5fa" opacity="0.25"/>
-        </svg>
-      </router-link>
+      <!-- 左 ZZzz -->
+      <text x="0"  y="24" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="20" y="24" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="40" y="22" font-family="monospace" font-size="15" fill="#60a5fa" opacity="0.7">z</text>
+      <text x="56" y="20" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+      <!-- 中间 sws：与两侧 z 齐平 -->
+      <text x="70" y="20" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">s</text>
+      <text x="82" y="20" font-family="monospace" font-size="12" fill="#3b82f6" opacity="0.45">w</text>
+      <text x="96" y="20" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">s</text>
+      <!-- 右 zzZZ -->
+      <text x="108" y="20" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+      <text x="124" y="22" font-family="monospace" font-size="15" fill="#60a5fa" opacity="0.7">z</text>
+      <text x="144" y="24" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="164" y="24" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
 
       <!-- Desktop Nav -->
       <div class="hidden items-center gap-1 md:flex">
