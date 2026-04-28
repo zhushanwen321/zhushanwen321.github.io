@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@layer components {
+  .prose-invert a {
+    color: #60a5fa;
+  }
+  .prose-invert a:hover {
+    color: #93bbfd;
+  }
+  .prose-invert table thead {
+    border-bottom-color: #333;
+  }
+  .prose-invert table tbody tr {
+    border-bottom-color: #222;
+  }
+  .prose-invert code {
+    color: #a5f3fc;
+    background: #1a1a1a;
+  }
+  .prose-invert code::before,
+  .prose-invert code::after {
+    content: none;
+  }
+  .prose-invert pre code {
+    background: transparent;
+    color: #e2e8f0;
+  }
+}
