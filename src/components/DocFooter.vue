@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { getPrevNext, llmSimpleRouterSidebar } from '../config/sidebar'
 
 const route = useRoute()
+const { t } = useI18n()
 const navigation = computed(() => getPrevNext(llmSimpleRouterSidebar, route.path))
 </script>
 
@@ -14,9 +16,9 @@ const navigation = computed(() => getPrevNext(llmSimpleRouterSidebar, route.path
       :to="navigation.prev.path"
       class="group flex flex-col items-start rounded-lg border border-white/10 px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
     >
-      <span class="text-xs text-gray-500">上一页</span>
+      <span class="text-xs text-gray-500">{{ t('footer.prev') }}</span>
       <span class="text-sm text-gray-300 group-hover:text-white transition-colors">
-        {{ navigation.prev.title }}
+        {{ t(navigation.prev.titleKey) }}
       </span>
     </router-link>
     <div v-else />
@@ -26,9 +28,9 @@ const navigation = computed(() => getPrevNext(llmSimpleRouterSidebar, route.path
       :to="navigation.next.path"
       class="group flex flex-col items-end rounded-lg border border-white/10 px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/5"
     >
-      <span class="text-xs text-gray-500">下一页</span>
+      <span class="text-xs text-gray-500">{{ t('footer.next') }}</span>
       <span class="text-sm text-gray-300 group-hover:text-white transition-colors">
-        {{ navigation.next.title }}
+        {{ t(navigation.next.titleKey) }}
       </span>
     </router-link>
     <div v-else />

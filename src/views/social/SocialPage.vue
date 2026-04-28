@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
+const isZh = computed(() => locale.value === 'zh')
+
 const qrSize = 180
 
 const items = [
@@ -29,13 +34,19 @@ const items = [
 <template>
   <div class="pt-14 min-h-screen">
     <div class="mx-auto max-w-4xl px-8 py-12">
-      <!-- 头部 -->
+      <!-- Header -->
       <div class="mb-10">
-        <h1 class="text-2xl font-bold text-gray-100">社交平台</h1>
-        <p class="mt-2 text-gray-500">扫码或点击图标联系我</p>
+        <template v-if="isZh">
+          <h1 class="text-2xl font-bold text-gray-100">社交平台</h1>
+          <p class="mt-2 text-gray-500">扫码或点击图标联系我</p>
+        </template>
+        <template v-else>
+          <h1 class="text-2xl font-bold text-gray-100">Social Platforms</h1>
+          <p class="mt-2 text-gray-500">Scan QR code or tap to connect</p>
+        </template>
       </div>
 
-      <!-- 二维码卡片 -->
+      <!-- QR cards (same for both languages) -->
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <a
           v-for="item in items"
@@ -58,9 +69,14 @@ const items = [
         </a>
       </div>
 
-      <!-- GitHub / Gitee 快捷入口 -->
+      <!-- GitHub / Gitee quick links (same for both languages) -->
       <div class="mt-12 border-t border-white/10 pt-8">
-        <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">代码仓库</h2>
+        <template v-if="isZh">
+          <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">代码仓库</h2>
+        </template>
+        <template v-else>
+          <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">Code Repositories</h2>
+        </template>
         <div class="flex gap-4">
           <a
             href="https://github.com/zhushanwen321"

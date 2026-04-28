@@ -1,61 +1,45 @@
+import { SIDEBAR_KEYS as K } from '../composables/useLocale'
+
 export interface SidebarItem {
-  title: string
+  titleKey: string
   path: string
 }
 
 export interface SidebarGroup {
-  title: string
+  titleKey: string
   items: SidebarItem[]
 }
 
 export const llmSimpleRouterSidebar: SidebarGroup[] = [
-  {
-    title: '快速开始',
-    items: [
-      { title: '概览', path: '/project/llm-simple-router/' },
-      { title: '启动 Router', path: '/project/llm-simple-router/guide/getting-started' },
-    ],
-  },
-  {
-    title: '功能特性',
-    items: [
-      { title: '自动重试', path: '/project/llm-simple-router/guide/features/auto-retry' },
-      { title: '多供应商支持', path: '/project/llm-simple-router/guide/features/providers' },
-      { title: '模型映射', path: '/project/llm-simple-router/guide/features/model-mapping' },
-      { title: '并发控制', path: '/project/llm-simple-router/guide/features/concurrency' },
-      { title: '故障转移', path: '/project/llm-simple-router/guide/features/failover' },
-      { title: '实时监控', path: '/project/llm-simple-router/guide/features/monitor' },
-      { title: '多密钥管理', path: '/project/llm-simple-router/guide/features/multi-key' },
-    ],
-  },
-  {
-    title: '配置指南',
-    items: [
-      { title: 'Claude Code 配置', path: '/project/llm-simple-router/guide/config/claude-code' },
-      { title: '环境变量', path: '/project/llm-simple-router/guide/config/env' },
-      { title: 'Docker 部署', path: '/project/llm-simple-router/guide/config/docker' },
-    ],
-  },
-  {
-    title: '架构原理',
-    items: [
-      { title: '系统上下文', path: '/project/llm-simple-router/guide/architecture/system-context' },
-      { title: '请求流水线', path: '/project/llm-simple-router/guide/architecture/request-pipeline' },
-    ],
-  },
-  {
-    title: '请求日志',
-    items: [
-      { title: '四阶段链路', path: '/project/llm-simple-router/guide/logging/pipeline' },
-    ],
-  },
-  {
-    title: '性能指标',
-    items: [
-      { title: 'TTFT / TPS', path: '/project/llm-simple-router/guide/metrics/ttft-tps' },
-      { title: 'Token 用量', path: '/project/llm-simple-router/guide/metrics/tokens' },
-    ],
-  },
+  { titleKey: K.quickStart, items: [
+    { titleKey: K.overview, path: '/project/llm-simple-router/' },
+    { titleKey: K.startRouter, path: '/project/llm-simple-router/guide/getting-started' },
+  ]},
+  { titleKey: K.features, items: [
+    { titleKey: K.autoRetry, path: '/project/llm-simple-router/guide/features/auto-retry' },
+    { titleKey: K.providers, path: '/project/llm-simple-router/guide/features/providers' },
+    { titleKey: K.modelMapping, path: '/project/llm-simple-router/guide/features/model-mapping' },
+    { titleKey: K.concurrency, path: '/project/llm-simple-router/guide/features/concurrency' },
+    { titleKey: K.failover, path: '/project/llm-simple-router/guide/features/failover' },
+    { titleKey: K.monitor, path: '/project/llm-simple-router/guide/features/monitor' },
+    { titleKey: K.multiKey, path: '/project/llm-simple-router/guide/features/multi-key' },
+  ]},
+  { titleKey: K.config, items: [
+    { titleKey: K.claudeCode, path: '/project/llm-simple-router/guide/config/claude-code' },
+    { titleKey: K.env, path: '/project/llm-simple-router/guide/config/env' },
+    { titleKey: K.docker, path: '/project/llm-simple-router/guide/config/docker' },
+  ]},
+  { titleKey: K.architecture, items: [
+    { titleKey: K.systemContext, path: '/project/llm-simple-router/guide/architecture/system-context' },
+    { titleKey: K.requestPipeline, path: '/project/llm-simple-router/guide/architecture/request-pipeline' },
+  ]},
+  { titleKey: K.logging, items: [
+    { titleKey: K.pipeline, path: '/project/llm-simple-router/guide/logging/pipeline' },
+  ]},
+  { titleKey: K.metrics, items: [
+    { titleKey: K.ttftTps, path: '/project/llm-simple-router/guide/metrics/ttft-tps' },
+    { titleKey: K.tokens, path: '/project/llm-simple-router/guide/metrics/tokens' },
+  ]},
 ]
 
 export function getAllPages(sidebar: SidebarGroup[]): SidebarItem[] {
