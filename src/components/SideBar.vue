@@ -10,7 +10,7 @@ const expandedGroups = ref<Record<string, boolean>>({})
 // 自动展开包含当前路由的分组
 watch(
   () => route.path,
-  (path) => {
+  (_path) => {
     for (const group of sidebar) {
       if (group.items.some((item) => isActive(item.path))) {
         expandedGroups.value[group.title] = true

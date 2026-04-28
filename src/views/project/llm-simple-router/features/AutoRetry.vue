@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CodeBlock from '../../../../components/CodeBlock.vue'
 import ScreenShot from '../../../../components/ScreenShot.vue'
 </script>
 

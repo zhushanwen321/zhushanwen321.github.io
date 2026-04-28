@@ -1,8 +1,12 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   code: string
   language?: string
 }>()
+
+function copyCode() {
+  window.navigator.clipboard.writeText(props.code)
+}
 </script>
 
 <template>
@@ -11,7 +15,7 @@ defineProps<{
       <span class="text-xs text-gray-500">{{ language || 'bash' }}</span>
       <button
         class="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-        @click="navigator.clipboard.writeText(code)"
+        @click="copyCode"
       >
         复制
       </button>
