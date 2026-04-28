@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo 预览 - zzZZswszzZZ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 40px; }
+  h1 { font-size: 20px; color: #888; margin-bottom: 40px; text-align: center; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
+  .card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; cursor: pointer; transition: border-color .2s; }
+  .card:hover { border-color: #444; }
+  .card svg { display: block; }
+  .label { font-size: 12px; color: #666; text-align: center; }
+  .use-btn { background: #222; border: 1px solid #333; color: #aaa; border-radius: 6px; padding: 6px 16px; font-size: 12px; cursor: pointer; transition: all .2s; }
+  .use-btn:hover { background: #333; color: #fff; border-color: #555; }
+  .selected { border-color: #3b82f6 !important; }
+  .selected .use-btn { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+</style>
+</head>
+<body>
+<h1>⌄ 点击选择一个 Logo 方案 ⌄</h1>
+<div class="grid" id="grid"></div>
+
+<script>
+const logos = [
+  // ─── 方案 1: 月牙 + 漂浮 zZ ───
+  {
+    name: '方案 1: 月牙睡眠',
+    svg: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <!-- 月牙 -->
+      <path d="M50 16C40 20 33 30 33 40C33 50 40 60 50 64C42 62 36 54 36 44C36 34 42 24 50 16Z" fill="#60a5fa" opacity="0.9"/>
+      <!-- zZ -->
+      <text x="54" y="36" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.6">z</text>
+      <text x="60" y="28" font-family="monospace" font-size="20" fill="#60a5fa" opacity="0.8">Z</text>
+      <text x="56" y="16" font-family="monospace" font-size="26" fill="#60a5fa">Z</text>
+    </svg>`,
+
+    code: `<svg width="40" height="40" viewBox="0 0 80 80" fill="none">
+  <path d="M50 16C40 20 33 30 33 40C33 50 40 60 50 64C42 62 36 54 36 44C36 34 42 24 50 16Z" fill="#60a5fa" opacity="0.9"/>
+  <text x="54" y="36" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.6">z</text>
+  <text x="60" y="28" font-family="monospace" font-size="20" fill="#60a5fa" opacity="0.8">Z</text>
+  <text x="56" y="16" font-family="monospace" font-size="26" fill="#60a5fa">Z</text>
+</svg>`
+  },
+
+  // ─── 方案 2: Z 字母堆叠 + 月牙 ───
+  {
+    name: '方案 2: Z 堆叠',
+    svg: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <!-- 底部底座 -->
+      <rect x="16" y="56" width="48" height="4" rx="2" fill="#3b82f6" opacity="0.3"/>
+      <!-- 三个 Z 堆叠 -->
+      <text x="24" y="54" font-family="monospace" font-size="18" font-weight="bold" fill="#3b82f6" opacity="0.5">z</text>
+      <text x="28" y="42" font-family="monospace" font-size="22" font-weight="bold" fill="#3b82f6" opacity="0.75">Z</text>
+      <text x="24" y="26" font-family="monospace" font-size="30" font-weight="bold" fill="#60a5fa">Z</text>
+      <!-- 小星星 -->
+      <circle cx="56" cy="18" r="3" fill="#60a5fa" opacity="0.4"/>
+      <circle cx="50" cy="10" r="2" fill="#60a5fa" opacity="0.3"/>
+      <circle cx="62" cy="12" r="2" fill="#60a5fa" opacity="0.3"/>
+    </svg>`,
+
+    code: `<svg width="40" height="40" viewBox="0 0 80 80" fill="none">
+  <rect x="16" y="56" width="48" height="4" rx="2" fill="#3b82f6" opacity="0.3"/>
+  <text x="24" y="54" font-family="monospace" font-size="18" font-weight="bold" fill="#3b82f6" opacity="0.5">z</text>
+  <text x="28" y="42" font-family="monospace" font-size="22" font-weight="bold" fill="#3b82f6" opacity="0.75">Z</text>
+  <text x="24" y="26" font-family="monospace" font-size="30" font-weight="bold" fill="#60a5fa">Z</text>
+  <circle cx="56" cy="18" r="3" fill="#60a5fa" opacity="0.4"/>
+  <circle cx="50" cy="10" r="2" fill="#60a5fa" opacity="0.3"/>
+  <circle cx="62" cy="12" r="2" fill="#60a5fa" opacity="0.3"/>
+</svg>`
+  },
+
+  // ─── 方案 3: 极简单行文本徽标 ───
+  {
+    name: '方案 3: 极简文字标',
+    svg: `<svg width="140" height="40" viewBox="0 0 140 40" fill="none">
+      <text x="0" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="20" y="26" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.8">z</text>
+      <text x="34" y="26" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+      <text x="48" y="22" font-family="monospace" font-size="13" fill="#666">sws</text>
+      <text x="82" y="28" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+      <text x="94" y="26" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.8">z</text>
+      <text x="108" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="128" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+      <!-- 装饰线 -->
+      <line x1="0" y1="34" x2="140" y2="34" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+    </svg>`,
+
+    code: `<svg width="140" height="40" viewBox="0 0 140 40" fill="none">
+  <text x="0" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+  <text x="20" y="26" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.8">z</text>
+  <text x="34" y="26" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+  <text x="48" y="22" font-family="monospace" font-size="13" fill="#666">sws</text>
+  <text x="82" y="28" font-family="monospace" font-size="12" fill="#60a5fa" opacity="0.5">z</text>
+  <text x="94" y="26" font-family="monospace" font-size="16" fill="#60a5fa" opacity="0.8">z</text>
+  <text x="108" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+  <text x="128" y="26" font-family="monospace" font-size="20" font-weight="bold" fill="#60a5fa">Z</text>
+  <line x1="0" y1="34" x2="140" y2="34" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+</svg>`
+  },
+
+  // ─── 方案 4: 月牙包裹 Z ───
+  {
+    name: '方案 4: 月牙抱 Z',
+    svg: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <!-- 月牙 -->
+      <path d="M56 14C44 20 36 32 36 44C36 56 44 66 56 70C46 66 40 56 40 44C40 32 46 20 56 14Z" fill="#3b82f6"/>
+      <!-- 主 Z -->
+      <text x="42" y="48" font-family="monospace" font-size="28" font-weight="bold" fill="#0a0a0a">Z</text>
+      <!-- 小 z -->
+      <text x="46" y="34" font-family="monospace" font-size="14" fill="#60a5fa" opacity="0.8">z</text>
+      <text x="50" y="20" font-family="monospace" font-size="18" fill="#93bbfd" opacity="0.9">Z</text>
+    </svg>`,
+
+    code: `<svg width="40" height="40" viewBox="0 0 80 80" fill="none">
+  <path d="M56 14C44 20 36 32 36 44C36 56 44 66 56 70C46 66 40 56 40 44C40 32 46 20 56 14Z" fill="#3b82f6"/>
+  <text x="42" y="48" font-family="monospace" font-size="28" font-weight="bold" fill="#0a0a0a">Z</text>
+  <text x="46" y="34" font-family="monospace" font-size="14" fill="#60a5fa" opacity="0.8">z</text>
+  <text x="50" y="20" font-family="monospace" font-size="18" fill="#93bbfd" opacity="0.9">Z</text>
+</svg>`
+  },
+
+  // ─── 方案 5: 闪电 Z ───
+  {
+    name: '方案 5: 闪电 Z',
+    svg: `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+      <!-- 闪电 + Z 混合 -->
+      <path d="M44 8L24 44H38L34 72L60 34H46L50 8H44Z" fill="#60a5fa"/>
+      <!-- 小 z 漂浮 -->
+      <text x="30" y="16" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.6">z</text>
+      <text x="54" y="10" font-family="monospace" font-size="14" fill="#60a5fa" opacity="0.7">Z</text>
+      <text x="62" y="22" font-family="monospace" font-size="10" fill="#60a5fa" opacity="0.5">z</text>
+    </svg>`,
+
+    code: `<svg width="40" height="40" viewBox="0 0 80 80" fill="none">
+  <path d="M44 8L24 44H38L34 72L60 34H46L50 8H44Z" fill="#60a5fa"/>
+  <text x="30" y="16" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.6">z</text>
+  <text x="54" y="10" font-family="monospace" font-size="14" fill="#60a5fa" opacity="0.7">Z</text>
+  <text x="62" y="22" font-family="monospace" font-size="10" fill="#60a5fa" opacity="0.5">z</text>
+</svg>`
+  },
+
+  // ─── 方案 6: 纯字母 Logo ───
+  {
+    name: '方案 6: 纯字母韵律',
+    svg: `<svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+      <!-- 大小交错 Z/z -->
+      <text x="0" y="24" font-family="monospace" font-size="24" font-weight="bold" fill="#60a5fa">Z</text>
+      <text x="24" y="20" font-family="monospace" font-size="14" fill="#3b82f6" opacity="0.7">z</text>
+      <text x="38" y="16" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">z</text>
+      <text x="50" y="24" font-family="monospace" font-size="12" fill="#555">sws</text>
+      <text x="80" y="16" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">z</text>
+      <text x="90" y="20" font-family="monospace" font-size="14" fill="#3b82f6" opacity="0.7">z</text>
+      <text x="104" y="24" font-family="monospace" font-size="24" font-weight="bold" fill="#60a5fa">Z</text>
+      <!-- 装饰圆点 -->
+      <circle cx="100" cy="10" r="2" fill="#60a5fa" opacity="0.25"/>
+    </svg>`,
+
+    code: `<svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+  <text x="0" y="24" font-family="monospace" font-size="24" font-weight="bold" fill="#60a5fa">Z</text>
+  <text x="24" y="20" font-family="monospace" font-size="14" fill="#3b82f6" opacity="0.7">z</text>
+  <text x="38" y="16" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">z</text>
+  <text x="50" y="24" font-family="monospace" font-size="12" fill="#555">sws</text>
+  <text x="80" y="16" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4">z</text>
+  <text x="90" y="20" font-family="monospace" font-size="14" fill="#3b82f6" opacity="0.7">z</text>
+  <text x="104" y="24" font-family="monospace" font-size="24" font-weight="bold" fill="#60a5fa">Z</text>
+  <circle cx="100" cy="10" r="2" fill="#60a5fa" opacity="0.25"/>
+</svg>`
+  },
+]
+
+const grid = document.getElementById('grid')
+let selectedIndex = -1
+
+logos.forEach((logo, i) => {
+  const card = document.createElement('div')
+  card.className = 'card'
+  card.innerHTML = \`
+    \${logo.svg}
+    <span class="label">\${logo.name}</span>
+    <button class="use-btn" data-index="\${i}">选择此方案</button>
+  \`
+  card.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'BUTTON') return
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'))
+    card.classList.add('selected')
+    selectedIndex = i
+    alert(\`已选择 \${logo.name}，SVG 代码已复制到剪贴板\`)
+    navigator.clipboard.writeText(logo.code)
+  })
+  grid.appendChild(card)
+})
+</script>
+
+</body>
+</html>

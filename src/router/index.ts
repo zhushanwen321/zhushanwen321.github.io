@@ -9,6 +9,30 @@ const router = createRouter({
       redirect: '/project/llm-simple-router/',
     },
     {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
+      path: '/social',
+      component: () => import('../views/social/SocialPage.vue'),
+    },
+    {
       path: '/project/llm-simple-router',
       component: DocLayout,
       children: [

@@ -22,9 +22,18 @@ function isActive(path: string): boolean {
 <template>
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-surface/80 backdrop-blur-md">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
-      <!-- Logo -->
-      <router-link to="/" class="font-mono text-lg font-bold tracking-tight text-gray-100 hover:text-accent-dim transition-colors">
-        zhushanwen
+      <!-- Logo: ZZzzswszzZZ -->
+      <router-link to="/" class="flex items-center gap-1 group">
+        <svg width="100" height="28" viewBox="0 0 100 28" fill="none" class="transition-opacity group-hover:opacity-80">
+          <text x="0" y="18" font-family="monospace" font-size="18" font-weight="bold" fill="#60a5fa">Z</text>
+          <text x="18" y="15" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.7">z</text>
+          <text x="28" y="12" font-family="monospace" font-size="8" fill="#60a5fa" opacity="0.4">z</text>
+          <text x="36" y="16" font-family="monospace" font-size="9" fill="#666">sws</text>
+          <text x="60" y="12" font-family="monospace" font-size="8" fill="#60a5fa" opacity="0.4">z</text>
+          <text x="68" y="15" font-family="monospace" font-size="11" fill="#60a5fa" opacity="0.7">z</text>
+          <text x="78" y="18" font-family="monospace" font-size="18" font-weight="bold" fill="#60a5fa">Z</text>
+          <circle cx="94" cy="8" r="1.5" fill="#60a5fa" opacity="0.25"/>
+        </svg>
       </router-link>
 
       <!-- Desktop Nav -->
@@ -36,6 +45,7 @@ function isActive(path: string): boolean {
           个人介绍
         </router-link>
 
+        <!-- 项目介绍 dropdown: no gap between button and menu -->
         <div class="relative" @mouseleave="projectDropdownOpen = false">
           <button
             class="flex items-center gap-1 rounded-md px-3 py-1.5 text-sm transition-colors"
@@ -47,19 +57,25 @@ function isActive(path: string): boolean {
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
+          <!-- 透明桥接层消除空隙 -->
           <div
             v-show="projectDropdownOpen"
-            class="absolute left-0 top-full mt-1 w-56 rounded-lg border border-white/10 bg-surface-50 py-1 shadow-xl"
+            class="absolute left-0 top-[calc(100%-4px)] z-10"
+            @mouseenter="projectDropdownOpen = true"
           >
-            <router-link
-              v-for="project in projects"
-              :key="project.path"
-              :to="project.path"
-              class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
-              @click="projectDropdownOpen = false"
-            >
-              {{ project.name }}
-            </router-link>
+            <!-- 透明搭桥（覆盖按钮底部到菜单顶部的空隙） -->
+            <div class="h-1 w-full" />
+            <div class="w-56 rounded-lg border border-white/10 bg-surface-50 py-1 shadow-xl">
+              <router-link
+                v-for="project in projects"
+                :key="project.path"
+                :to="project.path"
+                class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                @click="projectDropdownOpen = false"
+              >
+                {{ project.name }}
+              </router-link>
+            </div>
           </div>
         </div>
 
@@ -85,7 +101,7 @@ function isActive(path: string): boolean {
           </svg>
         </a>
         <a
-          href="https://gitee.com/zhushanwen321"
+          href="https://gitee.com/zzzzswszzzz"
           target="_blank"
           rel="noopener"
           class="text-gray-500 hover:text-gray-300 transition-colors"
