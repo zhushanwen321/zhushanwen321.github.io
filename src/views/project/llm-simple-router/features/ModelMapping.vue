@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import ScreenShot from '../../../../components/ScreenShot.vue'
+import Mermaid from '../../../../components/Mermaid.vue'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
 const isZh = computed(() => locale.value === 'zh')
+
+const mappingFlow = `flowchart LR
+  A["客户端请求<br/>model: sonnet"] --> B{"调度层<br/>匹配时间窗口"}
+  B -->|"命中规则"| C["映射到 glm-5.1<br/>Provider: 智谱"]
+  B -->|"未命中"| D["返回 404<br/>无可用映射"]
+  C --> E["可选: transform_rule<br/>修改请求参数"]
+  E --> F["转发到 Provider"]
+  F -->|"成功"| G["返回响应"]
+  F -->|"失败"| H{"Failover?"}
+  H -->|"有备用"| I["切换下一个<br/>Provider"]
+  I --> E
+  H -->|"无备用"| J["返回错误"]`
 </script>
 
 <template>
@@ -16,6 +29,8 @@ const isZh = computed(() => locale.value === 'zh')
           客户端 → Router → 调度层（匹配时间窗口 + transform_rule）→ 后端 Provider → 返回
         </code>
       </div>
+
+      <Mermaid :code="mappingFlow" />
 
       <h2>调度层架构</h2>
       <p>v0.9.0 重构后，模型映射升级为 <strong>调度层</strong>（Scheduler），删除了轮询/随机策略，统一使用 <strong>Scheduled（分时段）</strong> 和 <strong>Failover（故障转移）</strong> 两种路由策略。</p>
@@ -34,6 +49,17 @@ const isZh = computed(() => locale.value === 'zh')
         <li>注入特定格式的请求头或字段</li>
         <li>针对不同 Provider 的格式差异做适配</li>
       </ul>
+
+      <h2>故障转移 (Failover)</h2>
+      <p>为同一个客户端模型配置多条映射规则，路由策略均选择 Failover。Router 按配置顺序依次尝试，当前 Provider 失败时自动切换下一个：</p>
+      <div class="not-prose my-4 rounded-lg border border-white/10 bg-surface-50 p-4">
+        <code class="text-sm font-mono text-gray-300 block leading-loose">
+          Provider A 失败 → 排除 A → Provider B 失败 → 排除 B<br>
+          → Provider C 成功 → 返回响应<br>
+          → 全部失败 → 返回最后一个错误
+        </code>
+      </div>
+      <p>典型场景：主力供应商（如智谱）偶尔限流，自动切换到备用供应商（如 Moonshot），主力恢复后自动切回。</p>
 
       <h2>可视化 Pipeline 编辑器</h2>
       <p><strong>MappingEntryEditor</strong> 组件以垂直 pipeline 形式展示单条映射链路：客户端模型 → 匹配规则 → 后端模型 → Provider，一目了然。</p>
@@ -85,6 +111,17 @@ const isZh = computed(() => locale.value === 'zh')
         <li>Inject specific headers or fields</li>
         <li>Adapt format differences between Providers</li>
       </ul>
+
+      <h2>Failover</h2>
+      <p>Configure multiple mapping rules for the same client model, all with Failover strategy. Router tries Providers in configured order, auto-switching on failure:</p>
+      <div class="not-prose my-4 rounded-lg border border-white/10 bg-surface-50 p-4">
+        <code class="text-sm font-mono text-gray-300 block leading-loose">
+          Provider A fails → Exclude A → Provider B fails → Exclude B<br>
+          → Provider C succeeds → Return response<br>
+          → All failed → Return last error
+        </code>
+      </div>
+      <p>Typical scenario: Primary provider (e.g. Zhipu) hits rate limit → auto-switch to backup (e.g. Moonshot), returns to primary when recovered.</p>
 
       <h2>Visual Pipeline Editor</h2>
       <p>The <strong>MappingEntryEditor</strong> component renders a single mapping chain as a vertical pipeline: Client Model → Match Rule → Backend Model → Provider — clear at a glance.</p>

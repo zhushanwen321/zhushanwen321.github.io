@@ -34,7 +34,13 @@ const isZh = computed(() => locale.value === 'zh')
       <p>每个 Provider 下的模型支持独立设置 <code>stream_timeout_ms</code>（流式响应超时时间）。超时后 Router 返回 408 错误，在映射配置页面可以直观看到各模型的超时 badge。详见 <router-link to="/project/llm-simple-router/guide/features/model-mapping">模型映射</router-link>。</p>
 
       <h2>网络代理</h2>
-      <p>Provider 级支持 SOCKS5 / HTTPS 代理配置。在 Provider 编辑弹窗中可设置代理类型、主机、端口和认证信息。详见 <router-link to="/project/llm-simple-router/guide/features/proxy">网络代理</router-link>。</p>
+      <p>Provider 级别支持 SOCKS5 / HTTPS 代理。在 Provider 编辑弹窗中配置：</p>
+      <ul>
+        <li><strong>代理类型</strong>：SOCKS5 或 HTTPS</li>
+        <li><strong>代理主机 / 端口</strong>：代理服务器地址</li>
+        <li><strong>认证信息</strong>：用户名和密码（可选）</li>
+      </ul>
+      <p>适用场景：企业内网需通过代理访问外网 API，或使用 SOCKS5 代理访问受限区域。</p>
 
       <h2>并发控制</h2>
       <p>每个 Provider 可独立配置并发数上限，支持固定值和自适应动态调整。详见 <router-link to="/project/llm-simple-router/guide/features/concurrency">并发控制</router-link>。</p>
@@ -66,7 +72,13 @@ const isZh = computed(() => locale.value === 'zh')
       <p>Each model under a Provider supports a custom <code>stream_timeout_ms</code> (streaming response timeout). On timeout the Router returns a 408 error. Timeout badges are displayed on the mapping config page. See <router-link to="/project/llm-simple-router/guide/features/model-mapping">Model Mapping</router-link>.</p>
 
       <h2>Network Proxy</h2>
-      <p>Per-Provider SOCKS5/HTTPS proxy configuration. Set proxy type, host, port, and authentication in the Provider edit dialog. See <router-link to="/project/llm-simple-router/guide/features/proxy">Network Proxy</router-link>.</p>
+      <p>Per-Provider SOCKS5/HTTPS proxy — configure in the Provider edit dialog:</p>
+      <ul>
+        <li><strong>Proxy Type</strong>: SOCKS5 or HTTPS</li>
+        <li><strong>Host / Port</strong>: Proxy server address</li>
+        <li><strong>Authentication</strong>: Username and password (optional)</li>
+      </ul>
+      <p>Use cases: corporate networks requiring proxy for external APIs, or region-restricted API access via SOCKS5.</p>
 
       <h2>Concurrency Control</h2>
       <p>Each Provider can have independent concurrency limits with fixed or adaptive modes. See <router-link to="/project/llm-simple-router/guide/features/concurrency">Concurrency Control</router-link>.</p>
