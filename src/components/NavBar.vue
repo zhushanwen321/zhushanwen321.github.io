@@ -66,6 +66,16 @@ function toggleLocale() { locale.value = locale.value === 'zh' ? 'en' : 'zh' }
       </div>
 
       <div class="flex items-center gap-2">
+        <!-- Visitor counter (busuanzi) -->
+        <span id="busuanzi_container_site_pv" style="display:none" class="items-center gap-1 text-xs text-gray-500">
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+          <span id="busuanzi_value_site_pv" />
+        </span>
+        <span id="busuanzi_container_site_uv" style="display:none" class="items-center gap-1 text-xs text-gray-500">
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+          <span id="busuanzi_value_site_uv" />
+        </span>
+
         <!-- Language switcher -->
         <button @click="toggleLocale" class="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-400 hover:text-gray-200 hover:bg-white/5 transition-colors" title="Switch Language">
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
