@@ -64,5 +64,16 @@ const isZh = computed(() => locale.value === 'zh')
         <tr><td>{{ isZh ? '上游 Provider' : 'Upstream Providers' }}</td><td>{{ isZh ? '接收转发的请求，返回 SSE 流或 JSON 响应' : 'Receive forwarded requests, return SSE streams or JSON responses' }}</td></tr>
       </tbody>
     </table>
+
+    <h2>{{ isZh ? '内部架构：Monorepo' : 'Internal Architecture: Monorepo' }}</h2>
+    <p>{{ isZh ? 'v0.9.0 起，项目重构为 Monorepo 结构，拆分为三个独立包：' : 'Since v0.9.0, the project has been restructured as a monorepo with three independent packages:' }}</p>
+    <table>
+      <thead><tr><th>{{ isZh ? '包名' : 'Package' }}</th><th>{{ isZh ? '说明' : 'Description' }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>@llm-router/core</code></td><td>{{ isZh ? '核心模块库：并发控制、循环检测、日志、监控、错误处理等可复用组件' : 'Core module library: concurrency control, loop detection, logging, monitoring, error handling — reusable components' }}</td></tr>
+        <tr><td><code>router</code></td><td>{{ isZh ? '主路由服务：HTTP 代理、模型映射调度、Provider Patch 转换' : 'Main router service: HTTP proxy, model mapping scheduling, Provider Patch conversion' }}</td></tr>
+        <tr><td><code>pi-extension</code></td><td>{{ isZh ? 'Pi 编码代理插件：将并发、循环检测、监控等能力对接 pi agent 平台' : 'Pi coding agent extension: adapts concurrency, loop detection, and monitoring for the pi agent platform' }}</td></tr>
+      </tbody>
+    </table>
   </div>
 </template>

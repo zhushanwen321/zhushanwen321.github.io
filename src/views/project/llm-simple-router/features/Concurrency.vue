@@ -9,7 +9,8 @@ const isZh = computed(() => locale.value === 'zh')
   <div class="prose prose-invert max-w-none">
     <template v-if="isZh">
       <h1>并发控制</h1>
-      <p>按 Provider 配置并发数上限，超限请求排队等待。防止同时发送过多请求导致 Provider 限流或报错。</p>
+      <p>按 Provider 配置并发数上限，超限请求排队等待。支持自适应动态调整，防止同时发送过多请求导致 Provider 限流或报错。</p>
+
       <h2>工作原理</h2>
       <div class="not-prose my-4 rounded-lg border border-white/10 bg-surface-50 p-4">
         <code class="text-sm font-mono text-gray-300 block leading-loose">
@@ -20,16 +21,30 @@ const isZh = computed(() => locale.value === 'zh')
           → 等待超时：返回 504 Gateway Timeout
         </code>
       </div>
+
+      <h2>自适应并发控制</h2>
+      <p>v0.9.21 新增自适应并发控制，不再依赖人工估算最大并发数：</p>
+      <ul>
+        <li><strong>动态调整</strong>：根据上游 Provider 的响应时间自动增减并发度</li>
+        <li><strong>冷启动平滑</strong>：初始并发度从低值起步，避免冷启动阶段冲击上游</li>
+        <li><strong>非并发错误区分</strong>：仅根据并发相关错误（429 限流等）触发退避，普通业务错误不影响并发度</li>
+        <li><strong>信号量超时可视化</strong>：信号量等待超时的请求会在监控面板中明确标记</li>
+        <li><strong>stream_error 正确处理</strong>：流式传输中的错误按类型区分，避免误过滤</li>
+      </ul>
+
       <h2>配置方式</h2>
-      <p>在管理后台 &gt; Provider 页面，为每个 Provider 设置最大并发数。建议根据 Provider 的 API 限制合理配置。</p>
+      <p>在管理后台 &gt; Provider 页面，为每个 Provider 设置最大并发数。支持手动固定值或启用自适应模式。建议根据 Provider 的 API 限制合理配置。</p>
+
       <h2>信号量机制</h2>
-      <p>Router 使用基于 Promise 的信号量机制实现并发控制。每个 Provider 维护独立的信号量，支持 AbortSignal 和超时。</p>
+      <p>Router 使用基于 Promise 的信号量机制实现并发控制。每个 Provider 维护独立的信号量，支持 AbortSignal 和超时。自适应模式下，信号量上限由 SemaphoreManager 动态调整。</p>
+
       <h2>监控</h2>
-      <p>实时监控页面可以看到每个 Provider 的当前活跃请求数、等待队列长度等状态。详见 <router-link to="/project/llm-simple-router/guide/features/monitor">实时监控</router-link>。</p>
+      <p>实时监控页面可以看到每个 Provider 的当前活跃请求数、等待队列长度、自适应并发度变化趋势等状态。详见 <router-link to="/project/llm-simple-router/guide/features/monitor">实时监控</router-link>。</p>
     </template>
     <template v-else>
       <h1>Concurrency Control</h1>
-      <p>Configure per-Provider concurrency limits. Requests exceeding the limit are queued. Prevents sending too many requests simultaneously causing provider rate limits.</p>
+      <p>Configure per-Provider concurrency limits with adaptive dynamic adjustment. Requests exceeding the limit are queued. Prevents rate limit collisions across projects.</p>
+
       <h2>How It Works</h2>
       <div class="not-prose my-4 rounded-lg border border-white/10 bg-surface-50 p-4">
         <code class="text-sm font-mono text-gray-300 block leading-loose">
@@ -40,12 +55,25 @@ const isZh = computed(() => locale.value === 'zh')
           → Wait timeout: return 504 Gateway Timeout
         </code>
       </div>
+
+      <h2>Adaptive Concurrency Control</h2>
+      <p>Since v0.9.21, the Router supports adaptive concurrency — no more manual max-concurrency estimation:</p>
+      <ul>
+        <li><strong>Dynamic Adjustment</strong>: Auto increase/decrease concurrency based on upstream response time</li>
+        <li><strong>Smooth Cold Start</strong>: Start from a low concurrency value, avoid shocking upstream at boot</li>
+        <li><strong>Error Classification</strong>: Only trigger backoff on actual rate-limit errors (429). Normal business errors don't affect concurrency</li>
+        <li><strong>Semaphore Timeout Visibility</strong>: Requests that timeout waiting for semaphore slots are clearly marked in the monitor panel</li>
+        <li><strong>stream_error Handling</strong>: Streaming errors are classified by type, avoiding incorrect filtering</li>
+      </ul>
+
       <h2>Configuration</h2>
-      <p>Admin Panel &gt; Provider page, set max concurrency per provider.</p>
+      <p>Admin Panel &gt; Provider page. Set max concurrency manually or enable adaptive mode. Configure based on Provider API limits.</p>
+
       <h2>Semaphore Mechanism</h2>
-      <p>Router uses Promise-based semaphore for concurrency control. Each Provider has independent semaphore, supports AbortSignal and timeout.</p>
+      <p>Promise-based semaphore with independent per-Provider semaphores. Supports AbortSignal and timeout. In adaptive mode, the SemaphoreManager dynamically adjusts the semaphore limit.</p>
+
       <h2>Monitoring</h2>
-      <p>See the <router-link to="/project/llm-simple-router/guide/features/monitor">Live Monitor</router-link> page for active requests and queue length per Provider.</p>
+      <p>See the <router-link to="/project/llm-simple-router/guide/features/monitor">Live Monitor</router-link> page for active requests, queue length, and adaptive concurrency trends per Provider.</p>
     </template>
   </div>
 </template>

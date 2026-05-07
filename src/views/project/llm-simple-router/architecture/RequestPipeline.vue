@@ -7,7 +7,8 @@ const isZh = computed(() => locale.value === 'zh')
 
 const stages = [
   { nameZh: '认证', nameEn: 'Auth', descZh: 'Token 校验', descEn: 'Token Verify' },
-  { nameZh: '模型映射', nameEn: 'Model Map', descZh: 'A → B 转换', descEn: 'A → B Mapping' },
+  { nameZh: '模型映射', nameEn: 'Model Map', descZh: '调度匹配', descEn: 'Schedule Match' },
+  { nameZh: '网络代理', nameEn: 'Proxy', descZh: 'SOCKS5/HTTPS', descEn: 'SOCKS5/HTTPS' },
   { nameZh: '并发排队', nameEn: 'Concurrency', descZh: '信号量控制', descEn: 'Semaphore' },
   { nameZh: '调用上游', nameEn: 'Upstream', descZh: 'HTTP 代理', descEn: 'HTTP Proxy' },
   { nameZh: '日志 + 指标', nameEn: 'Log + Metric', descZh: '记录采集', descEn: 'Log & Collect' },
@@ -52,8 +53,9 @@ const stages = [
       <thead><tr><th>{{ isZh ? '阶段' : 'Stage' }}</th><th>{{ isZh ? '做什么' : 'What It Does' }}</th></tr></thead>
       <tbody>
         <tr><td>{{ isZh ? '认证' : 'Auth' }}</td><td>{{ isZh ? 'Bearer Token SHA256 哈希后查询 router_keys 表' : 'Bearer Token SHA256 hashed and looked up in router_keys table' }}</td></tr>
-        <tr><td>{{ isZh ? '模型映射 + 路由策略' : 'Model Mapping + Routing' }}</td><td>{{ isZh ? '客户端模型名映射到后端实际模型；支持分时段/轮询/随机/故障转移' : 'Map client model name to backend actual model; supports scheduled/round-robin/random/failover' }}</td></tr>
-        <tr><td>{{ isZh ? '并发排队' : 'Concurrency Queue' }}</td><td>{{ isZh ? 'Provider 级信号量，队列满返回 503，超时返回 504' : 'Provider-level semaphore, queue full → 503, timeout → 504' }}</td></tr>
+        <tr><td>{{ isZh ? '模型映射 + 路由策略' : 'Model Mapping + Routing' }}</td><td>{{ isZh ? '客户端模型名通过调度层匹配到后端模型；支持分时段调度、故障转移和 transform_rule 规则' : 'Client model name resolved through scheduling layer to backend model; supports scheduled, failover, and transform_rule' }}</td></tr>
+        <tr><td>{{ isZh ? '网络代理' : 'Network Proxy' }}</td><td>{{ isZh ? '通过 SOCKS5 或 HTTPS 代理连接上游 Provider（可选，按 Provider 配置）' : 'Connect to upstream Provider via SOCKS5 or HTTPS proxy (optional, per Provider config)' }}</td></tr>
+        <tr><td>{{ isZh ? '并发排队' : 'Concurrency Queue' }}</td><td>{{ isZh ? 'Provider 级信号量，支持自适应动态调整。队列满返回 503，超时返回 504' : 'Provider-level semaphore with adaptive adjustment. Queue full → 503, timeout → 504' }}</td></tr>
         <tr><td>{{ isZh ? '调用上游' : 'Upstream Call' }}</td><td>{{ isZh ? '原生 HTTP 代理，支持 SSE 流式；失败自动重试，Failover 切换 Provider' : 'Native HTTP proxy, supports SSE streaming; auto-retry on failure, failover switches Provider' }}</td></tr>
         <tr><td>{{ isZh ? '日志 + 指标' : 'Logging + Metrics' }}</td><td>{{ isZh ? '记录完整请求链路，采集 Token 用量、TTFT、TPS' : 'Record complete request pipeline, collect token usage, TTFT, TPS' }}</td></tr>
         <tr><td>{{ isZh ? '返回响应' : 'Return Response' }}</td><td>{{ isZh ? '将上游响应原样返回客户端' : 'Return upstream response as-is to client' }}</td></tr>

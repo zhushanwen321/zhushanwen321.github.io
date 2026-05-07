@@ -49,15 +49,19 @@ const isZh = computed(() => locale.value === 'zh')
           <tr><th>功能</th><th>说明</th></tr>
         </thead>
         <tbody>
-          <tr><td>自动重试</td><td>对 429/400/网络超时自动指数退避重试</td></tr>
-          <tr><td>多供应商支持</td><td>智谱、Moonshot、Minimax、火山引擎、阿里云、腾讯云等</td></tr>
-          <tr><td>模型分时段映射</td><td>按时间段自动切换后端模型</td></tr>
-          <tr><td>并发队列等待</td><td>按 Provider 配置并发数上限，超限请求排队等待</td></tr>
+          <tr><td>自动重试</td><td>对 429/400/1305(ZAI过载)/网络超时自动指数退避重试，支持状态码级可配置规则</td></tr>
+          <tr><td>多供应商支持</td><td>智谱、Moonshot、Minimax、火山引擎、阿里云、腾讯云等，支持自定义 upstream_path</td></tr>
+          <tr><td>模型分时段调度</td><td>按时间段自动切换后端模型，支持 transform_rule，可视化 pipeline 编辑器</td></tr>
+          <tr><td>自适应并发控制</td><td>根据上游响应时间动态调整并发度，超限排队，信号量机制</td></tr>
+          <tr><td>LLM 循环检测</td><td>N-gram 算法检测输出循环，自动中断，节省 Token</td></tr>
           <tr><td>Failover 故障转移</td><td>多 Provider 互备，失败自动切换下一个</td></tr>
-          <tr><td>实时请求监控</td><td>SSE 推送活跃请求、队列状态、流式输出实时查看</td></tr>
+          <tr><td>每模型流式超时</td><td>按模型粒度配置 stream_timeout_ms，超时 408 错误返回</td></tr>
+          <tr><td>网络代理</td><td>Provider 级别配置 SOCKS5 / HTTPS 代理，支持认证</td></tr>
+          <tr><td>实时请求监控</td><td>Dashboard 按 Provider 分 Tab，SSE 推送活跃请求、队列状态</td></tr>
           <tr><td>多密钥管理</td><td>独立密钥 + 模型白名单，支持多用户/多项目</td></tr>
-          <tr><td>请求日志</td><td>四阶段完整链路（客户端请求/上游请求/上游响应/客户端响应）</td></tr>
-          <tr><td>性能指标</td><td>TTFT、TPS、Token 用量、缓存命中率</td></tr>
+          <tr><td>请求日志</td><td>四阶段完整链路 + 分页 + 工具错误日志</td></tr>
+          <tr><td>性能指标</td><td>TTFT、TPS、Token 用量（Input/Output 分拆）、缓存命中率</td></tr>
+          <tr><td>OpenAI 兼容</td><td>/v1/chat/completions + /v1/responses 端点，Provider Patch 自动转换</td></tr>
         </tbody>
       </table>
     </template>
@@ -102,15 +106,19 @@ const isZh = computed(() => locale.value === 'zh')
           <tr><th>Feature</th><th>Description</th></tr>
         </thead>
         <tbody>
-          <tr><td>Auto Retry</td><td>Automatic exponential backoff retry for 429/400/network timeout errors</td></tr>
-          <tr><td>Multi-Provider</td><td>Zhipu, Moonshot, Minimax, Volcengine, Alibaba Cloud, Tencent Cloud, etc.</td></tr>
-          <tr><td>Time-based Model Mapping</td><td>Auto-switch backend models by time window</td></tr>
-          <tr><td>Concurrency Queue</td><td>Configurable per-provider concurrency limits with queue waiting</td></tr>
+          <tr><td>Auto Retry</td><td>Exponential backoff for 429/400/1305(ZAI overload)/timeout, per-status-code rules</td></tr>
+          <tr><td>Multi-Provider</td><td>Zhipu, Moonshot, Minimax, Volcengine, Alibaba Cloud, Tencent Cloud, etc. + custom upstream_path</td></tr>
+          <tr><td>Time-based Model Scheduling</td><td>Auto-switch by time window + transform_rule, visual pipeline editor</td></tr>
+          <tr><td>Adaptive Concurrency</td><td>Dynamic concurrency based on upstream response time, semaphore queuing</td></tr>
+          <tr><td>LLM Loop Detection</td><td>N-gram algorithm detects output loops, auto-interrupt to save tokens</td></tr>
           <tr><td>Failover</td><td>Multi-provider backup, auto-switch on failure</td></tr>
-          <tr><td>Live Monitor</td><td>SSE-pushed active requests, queue status, streaming output</td></tr>
+          <tr><td>Per-Model Stream Timeout</td><td>Model-level stream_timeout_ms config with 408 error response</td></tr>
+          <tr><td>Network Proxy</td><td>Per-Provider SOCKS5/HTTPS proxy configuration with authentication</td></tr>
+          <tr><td>Live Monitor</td><td>Dashboard with per-Provider tabs, SSE-pushed active requests and queue status</td></tr>
           <tr><td>Multi-Key</td><td>Independent API keys with model whitelists for multi-user/multi-project</td></tr>
-          <tr><td>Request Logging</td><td>Complete four-stage pipeline logging</td></tr>
-          <tr><td>Performance Metrics</td><td>TTFT, TPS, token usage, cache hit rate</td></tr>
+          <tr><td>Request Logging</td><td>Complete four-stage pipeline + pagination + tool error logging</td></tr>
+          <tr><td>Performance Metrics</td><td>TTFT, TPS, split input/output token usage, cache hit rate</td></tr>
+          <tr><td>OpenAI Compatible</td><td>/v1/chat/completions + /v1/responses endpoints, Provider Patch auto-conversion</td></tr>
         </tbody>
       </table>
     </template>
