@@ -61,6 +61,14 @@ const router = createRouter({
           component: () => import('../views/project/llm-simple-router/features/Concurrency.vue'),
         },
         {
+          path: 'guide/features/loop-detection',
+          component: () => import('../views/project/llm-simple-router/features/LoopDetection.vue'),
+        },
+        {
+          path: 'guide/features/proxy',
+          component: () => import('../views/project/llm-simple-router/features/Proxy.vue'),
+        },
+        {
           path: 'guide/features/failover',
           component: () => import('../views/project/llm-simple-router/features/Failover.vue'),
         },
@@ -71,6 +79,10 @@ const router = createRouter({
         {
           path: 'guide/features/multi-key',
           component: () => import('../views/project/llm-simple-router/features/MultiKey.vue'),
+        },
+        {
+          path: 'guide/features/openai-compat',
+          component: () => import('../views/project/llm-simple-router/features/OpenAICompat.vue'),
         },
         {
           path: 'guide/config/claude-code',

@@ -3,8 +3,9 @@ export default {
   sidebar: {
     quickStart: '快速开始', overview: '概览', startRouter: '启动 Router',
     features: '功能特性', autoRetry: '自动重试', providers: '多供应商支持',
-    modelMapping: '模型映射', concurrency: '并发控制', failover: '故障转移',
-    monitor: '实时监控', multiKey: '多密钥管理',
+    modelMapping: '模型映射', concurrency: '并发控制', loopDetection: '循环检测',
+    proxy: '网络代理', failover: '故障转移',
+    monitor: '实时监控', multiKey: '多密钥管理', openaiCompat: 'OpenAI 兼容',
     config: '配置指南', claudeCode: 'Claude Code 配置', env: '环境变量',
     docker: 'Docker 部署', architecture: '架构原理',
     systemContext: '系统上下文', requestPipeline: '请求流水线',
