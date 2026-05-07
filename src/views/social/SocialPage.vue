@@ -22,6 +22,13 @@ const items = [
     color: '#3370FF',
   },
   {
+    name: '飞书交流群',
+    label: '扫码加入交流群',
+    qr: '/images/飞书交流群.png',
+    link: '/images/飞书交流群.png',
+    color: '#3370FF',
+  },
+  {
     name: '哔哩哔哩',
     label: 'B站空间',
     qr: `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=https%3A%2F%2Fspace.bilibili.com%2F9377044`,
