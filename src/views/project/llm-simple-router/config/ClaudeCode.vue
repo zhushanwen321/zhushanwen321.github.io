@@ -61,6 +61,7 @@ const settingsFull = `{
         <li><code>settings.json</code> 中的环境变量对所有项目生效</li>
         <li>如果只想对当前项目生效，可放在 <code>.claude/settings.json</code>（项目根目录下）</li>
         <li>调试时可加参数：<code>claude --dangerously-skip-permissions --verbose --debug</code></li>
+        <li>设置 <code>export DEBUG=claude:*</code> 可查看 Claude Code 详细内部日志</li>
       </ul>
     </template>
     <template v-else>
@@ -81,6 +82,7 @@ const settingsFull = `{
         <li>Environment variables in <code>settings.json</code> apply to all projects</li>
         <li>To limit to the current project only, place them in <code>.claude/settings.json</code> (project root)</li>
         <li>For debugging, add flags: <code>claude --dangerously-skip-permissions --verbose --debug</code></li>
+        <li>Set <code>export DEBUG=claude:*</code> to view detailed Claude Code internal logs</li>
       </ul>
     </template>
   </div>

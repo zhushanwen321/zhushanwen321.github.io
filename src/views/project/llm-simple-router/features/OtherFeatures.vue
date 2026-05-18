@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import ScreenShot from '../../../../components/ScreenShot.vue'
 const { locale } = useI18n()
 const isZh = computed(() => locale.value === 'zh')
 </script>
@@ -40,6 +41,20 @@ const isZh = computed(() => locale.value === 'zh')
         Provider 级别支持 SOCKS5 / HTTPS 代理，在 Provider 编辑弹窗中配置。
         详见 <router-link to="/project/llm-simple-router/guide/features/providers">供应商管理</router-link>。
       </p>
+
+      <h2>用量大盘</h2>
+      <p>在 Dashboard 页面查看按时间、模型、密钥等维度的用量统计。内置 5 小时滑动窗口，适配 Coding Plan 的计量周期。</p>
+      <p>支持查看 Token 消耗趋势、请求成功率、按 Provider 分组的详细数据。</p>
+
+      <h2>升级通知</h2>
+      <p>新版本发布时自动在管理后台弹出升级提醒。点击一键升级后重启服务即可完成更新。</p>
+      <p>升级不会丢失数据，所有配置和日志保存在 <code>~/.llm-simple-router/</code> 目录中。</p>
+
+      <h2>DeepSeek 推理补丁</h2>
+      <p>Router 内置 DeepSeek <code>reasoning_thinking</code> 补丁，自动处理 DeepSeek 模型的推理输出格式。支持 DS 和其他模型在同一个映射表中混用切换。</p>
+      <p>使用 OpenAI SDK 或 Claude Code 调用 DeepSeek 模型时，无需关心推理格式的差异。</p>
+
+      <ScreenShot src="/images/llm-simple-router/proxy_enhance.png" caption="代理增强（实验性）" />
     </template>
 
     <template v-else>
@@ -76,6 +91,20 @@ const isZh = computed(() => locale.value === 'zh')
         Per-Provider SOCKS5/HTTPS proxy — configure in the Provider edit dialog.
         See <router-link to="/project/llm-simple-router/guide/features/providers">Provider Management</router-link>.
       </p>
+
+      <h2>Usage Dashboard</h2>
+      <p>View usage statistics by time, model, and key in the Dashboard page. Built-in 5-hour sliding window adapts to Coding Plan billing cycles.</p>
+      <p>Supports token consumption trends, request success rates, and detailed per-Provider data.</p>
+
+      <h2>Upgrade Notifications</h2>
+      <p>Automatic upgrade notification popup in admin panel when a new version is released. One-click upgrade and service restart to complete the update.</p>
+      <p>Upgrades do not lose data — all config and logs are preserved in <code>~/.llm-simple-router/</code>.</p>
+
+      <h2>DeepSeek Reasoning Patch</h2>
+      <p>Built-in DeepSeek <code>reasoning_thinking</code> patch automatically handles DeepSeek model reasoning output format. Supports mixing DS and other models in the same mapping table.</p>
+      <p>No need to worry about reasoning format differences when calling DeepSeek models via OpenAI SDK or Claude Code.</p>
+
+      <ScreenShot src="/images/llm-simple-router/proxy_enhance.png" caption="Proxy Enhancement (Experimental)" />
     </template>
   </div>
 </template>
