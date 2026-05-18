@@ -26,10 +26,13 @@ export const llmSimpleRouterSidebar: SidebarGroup[] = [
   ]},
   { titleKey: K.clientConfig, items: [
     { titleKey: K.claudeCode, path: '/project/llm-simple-router/guide/config/claude-code' },
+    { titleKey: K.codex, path: '/project/llm-simple-router/guide/config/codex' },
+    { titleKey: K.piConfig, path: '/project/llm-simple-router/guide/config/pi' },
   ]},
   { titleKey: K.deploy, items: [
     { titleKey: K.env, path: '/project/llm-simple-router/guide/config/env' },
     { titleKey: K.docker, path: '/project/llm-simple-router/guide/config/docker' },
+    { titleKey: K.processMgmt, path: '/project/llm-simple-router/guide/config/process-management' },
   ]},
   { titleKey: K.architecture, items: [
     { titleKey: K.archOverview, path: '/project/llm-simple-router/guide/architecture/overview' },

@@ -13,26 +13,6 @@ const router = createRouter({
       component: () => import('../views/social/SocialPage.vue'),
     },
     {
-      path: '/social',
-      component: () => import('../views/social/SocialPage.vue'),
-    },
-    {
-      path: '/social',
-      component: () => import('../views/social/SocialPage.vue'),
-    },
-    {
-      path: '/social',
-      component: () => import('../views/social/SocialPage.vue'),
-    },
-    {
-      path: '/social',
-      component: () => import('../views/social/SocialPage.vue'),
-    },
-    {
-      path: '/social',
-      component: () => import('../views/social/SocialPage.vue'),
-    },
-    {
       path: '/project/llm-simple-router',
       component: DocLayout,
       children: [
@@ -75,6 +55,18 @@ const router = createRouter({
         {
           path: 'guide/config/claude-code',
           component: () => import('../views/project/llm-simple-router/config/ClaudeCode.vue'),
+        },
+        {
+          path: 'guide/config/codex',
+          component: () => import('../views/project/llm-simple-router/config/Codex.vue'),
+        },
+        {
+          path: 'guide/config/pi',
+          component: () => import('../views/project/llm-simple-router/config/Pi.vue'),
+        },
+        {
+          path: 'guide/config/process-management',
+          component: () => import('../views/project/llm-simple-router/config/ProcessManagement.vue'),
         },
         {
           path: 'guide/config/env',

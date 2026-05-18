@@ -12,6 +12,7 @@ export default {
     architecture: '架构原理', archOverview: '架构概览',
     loggingMetrics: '日志与指标', logPipeline: '请求日志与性能指标',
     faq: '常见问题', faqPage: 'FAQ',
+    codex: 'Codex 配置', piConfig: 'Pi 配置', processMgmt: '进程管理',
   },
   footer: { prev: '上一页', next: '下一页' },
   social: { title: '社交平台', scanOrClick: '扫码或点击图标联系我', repos: '代码仓库' },

@@ -12,6 +12,7 @@ export default {
     architecture: 'Architecture', archOverview: 'Architecture Overview',
     loggingMetrics: 'Logging & Metrics', logPipeline: 'Logging & Performance Metrics',
     faq: 'FAQ', faqPage: 'FAQ',
+    codex: 'Codex Setup', piConfig: 'Pi Setup', processMgmt: 'Process Management',
   },
   footer: { prev: 'Previous', next: 'Next' },
   social: { title: 'Social Platforms', scanOrClick: 'Scan QR code or tap to connect', repos: 'Code Repositories' },

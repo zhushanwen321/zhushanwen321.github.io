@@ -46,4 +46,7 @@ export const SIDEBAR_KEYS = {
   logPipeline: 'sidebar.logPipeline',
   faq: 'sidebar.faq',
   faqPage: 'sidebar.faqPage',
+  codex: 'sidebar.codex',
+  piConfig: 'sidebar.piConfig',
+  processMgmt: 'sidebar.processMgmt',
 } as const
